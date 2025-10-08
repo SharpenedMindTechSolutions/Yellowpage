@@ -1,29 +1,48 @@
 import Category from "../Models/Category.js";
 
+// export const getCategories = async (req, res) => {
+//   try {
+//     const { page = 1, limit = 5, search = "" } = req.query;
+
+//     const query = search
+//       ? { name: { $regex: search, $options: "i" } }
+//       : {};
+
+//     const total = await Category.countDocuments(query);
+
+//     const categories = await Category.find(query)
+//       .sort({ createdAt: -1 })
+//       .skip((page - 1) * limit)
+//       .limit(Number(limit));
+
+//     res.json({
+//       categories,
+//       currentPage: Number(page),
+//       totalPages: Math.ceil(total / limit),
+//       totalItems: total,
+//     });
+//   } catch (err) {
+//     res.status(500).json({ message: err.message });
+//   }
+// };
+
 export const getCategories = async (req, res) => {
   try {
-    const { page = 1, limit = 5, search = "" } = req.query;
+    const { search = "" } = req.query;
 
     const query = search
       ? { name: { $regex: search, $options: "i" } }
       : {};
 
-    const total = await Category.countDocuments(query);
-
-    const categories = await Category.find(query)
-      .sort({ createdAt: -1 })
-      .skip((page - 1) * limit)
-      .limit(Number(limit));
+    const categories = await Category.find(query).sort({ createdAt: -1 });
 
     res.json({
       categories,
-      currentPage: Number(page),
-      totalPages: Math.ceil(total / limit),
-      totalItems: total,
+      totalItems: categories.length,
     });
   } catch (err) {
     res.status(500).json({ message: err.message });
-  }
+  }     
 };
 export const createCategory = async (req, res) => {
   try {
