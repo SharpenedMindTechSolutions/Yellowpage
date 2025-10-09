@@ -8,7 +8,7 @@ export default function CategoryManagement() {
   const [loading, setLoading] = useState(true);
 
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 100;
+  const itemsPerPage = 10;
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filter, setFilter] = useState("all");

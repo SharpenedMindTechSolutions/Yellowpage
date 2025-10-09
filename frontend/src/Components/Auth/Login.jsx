@@ -163,7 +163,7 @@ const Login = () => {
                 </button>
               </div>
 
-              {/* Forgot link */}
+              {/* Forgot link 
               <div className="text-center">
                 <Link
                   to="/forgot-password"
@@ -171,7 +171,7 @@ const Login = () => {
                 >
                   Forgot your password?
                 </Link>
-              </div>
+              </div> */}
             </Form>
           )}
         </Formik>
