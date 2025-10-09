@@ -13,20 +13,53 @@ dotenv.config();
 connectDB();
 const app = express();
 
-const allowedOrigins = process.env.CLIENT_URL ;
+// const allowedOrigins = process.env.CLIENT_URL ;
+
+// const corsOptions = {
+//   origin: function (origin, callback) { 
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS: " + origin));
+//     }
+//   },
+//   credentials: true,
+//   methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
+//   allowedHeaders: ["Content-Type", "Authorization"],
+// };
+
+// export default corsOptions;
+
 
 const corsOptions = {
-  origin: function (origin, callback) { 
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS: " + origin));
-    }
-  },
-  credentials: true,
-  methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+	    origin: [
+		     'https://sterlingonnet.com',
+		     'https://www.sterlingonnet.com',
+		     //'http://195.35.45.164:5173',
+		     //'http://127.0.0.1:5173',
+		     //'http://127.0.0.1',
+		     //'http://localhost:3000',  // for development
+		     'http://localhost:5173' // for development
+		    ],
+	    credentials: true,
+	    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+	    allowedHeaders: [
+		            'Content-Type', 
+		            'Authorization', 
+		            'X-Requested-With',
+		            'Accept',
+		            'Origin',
+		            'Access-Control-Request-Method',
+		            'Access-Control-Request-Headers'
+		        ],
+	    //exposedHeaders: [
+	    //	            'Content-Range',
+	    //	            'X-Content-Range'
+   	    //    ],
+	    preflightContinue: false,
+	    optionsSuccessStatus: 204
 };
+
 
 export default corsOptions;
 
